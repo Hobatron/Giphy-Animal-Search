@@ -5,16 +5,19 @@
 
 $("#submit").click(function(){
     newAnimal = $("#usersAnimal").val();
-    lowerCaseAnimal = newAnimal.toLowerCase()
-    correctedAnimal = newAnimal.charAt(0).toUpperCase() + newAnimal.slice(1);
-    newBTN = $("<button>").val(lowerCaseAnimal);
-    newBTN.addClass("btn btn-primary animalBTN");
-    newBTN.text(correctedAnimal);
-    $("#animalButtons").append(newBTN)
-    $(newBTN).click(function(){
-        animal = $(this).val();
-        // grab gifs
-    });
+    if (newAnimal != "" && true){
+        lowerCaseAnimal = newAnimal.toLowerCase()
+        correctedAnimal = newAnimal.charAt(0).toUpperCase() + newAnimal.slice(1);
+        newBTN = $("<button>").val(lowerCaseAnimal);
+        newBTN.addClass("btn btn-primary animalBTN");
+        newBTN.text(correctedAnimal);
+        $("#animalButtons").append(newBTN)
+        $(newBTN).click(function(){
+            animal = $(this).val();
+            // grab gifs
+        });
+    }
+
 });
 
 $(".animalBTN").click(function(){
