@@ -1,0 +1,58 @@
+body {
+    background-color: rgb(18, 18, 18
+    )
+}
+
+.animalBTN {
+    margin: 0 10px 10px 0;
+    background-color: #6359FF;
+    color: aliceblue;
+    font-weight: bold;
+}
+
+#submit {
+    
+	color: #fff;
+	background: linear-gradient(45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+	background-size: 600% 600%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 10% 40%
+	}
+	50% {
+		background-position: 90% 60%
+	}
+	100% {
+		background-position: 10% 40%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 10% 40%
+	}
+	50% {
+		background-position: 90% 60%
+	}
+	100% {
+		background-position: 10% 40%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 10% 40%
+	}
+	50% {
+		background-position: 90% 60%
+	}
+	100% {
+		background-position: 10% 40%
+	}
+}
+
