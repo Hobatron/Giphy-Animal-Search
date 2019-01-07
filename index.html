@@ -14,27 +14,39 @@
 
 <body>
 
-    <div class="container" id="main" style="padding-top: 35px">
+    <div class="container text-center" id="main" style="padding-top: 35px">
         <div class="row">
-            <div class="form-group col-4">
-                <label for="usersAnimal">Type in an animal!</label>
-                <input type="text" class="form-control" id="usersAnimal" placeholder="">
-                <button id="submit" style="margin-top: 10px;" type="submit" class="btn">Add to search</button>
+            <div class="text-left col-6">
+                <div id="inputForm" class="form-group">
+                    <label for="usersAnimal">Type in an animal!</label>
+                    <input type="text" class="form-control" id="usersAnimal" placeholder="">
+                    <button id="submit" style="margin-top: 10px;" type="submit" class="btn">Add to search</button>
+                </div>
             </div>
-            <div class="col-8">
-                <div id="animalButtons">
-                    <button value="cat" data-offset="0" class="btn animalBTN">Cat</button>
-                    <button value="dog" data-offset="0" class="btn animalBTN">Dog</button>
-                    <button value="mouse" data-offset="0" class="btn animalBTN">Mouse</button>
-                    <button value="llama" data-offset="0" class="btn animalBTN">Llama</button>
-                    <button value="spider" data-offset="0" class="btn animalBTN">Spider</button>
-                    <button value="parrot" data-offset="0" class="btn animalBTN">Parrot</button>
+            <div class="text-right col-6">
+                <div class="">
+                    <div id="animalButtons">
+                        <button value="cat" data-offset="0" class="btn animalBTN">Cat</button>
+                        <button value="dog" data-offset="0" class="btn animalBTN">Dog</button>
+                        <button value="mouse" data-offset="0" class="btn animalBTN">Mouse</button>
+                        <button value="llama" data-offset="0" class="btn animalBTN">Llama</button>
+                        <button value="spider" data-offset="0" class="btn animalBTN">Spider</button>
+                        <button value="parrot" data-offset="0" class="btn animalBTN">Parrot</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-        </div>
     </div>
+    <div class="row justify-content-center" id="results">
+        <div id="col0" class="col-2 imgCol"></div>
+        <div id="col1" class="col-2 imgCol"></div>
+        <div id="col2" class="col-2 imgCol"></div>
+        <div id="col3" class="col-2 imgCol"></div>
+    </div>
+
+    <footer class="row justify-content-center">
+        <img src="assits\imgs\poweredBy_GIPHY.png" alt="Powered By GIPHY" />
+    </footer>
 
     <!-- Scripts -->
     <div>
@@ -42,9 +54,6 @@
             crossorigin='anonymous'></script>
         <script src="assits/js/script.js"></script>
     </div>
-    <footer class="row justify-content-center">
-        <img src="assits\imgs\poweredBy_GIPHY.png" alt="Powered By GIPHY" />
-    </footer>
 
 </body>
 

@@ -1,6 +1,7 @@
 var timeCount = 0;
-var totalSearchs = 0;
 var canSearch = true;
+var colXTracker = [0, 0, 0, 0];
+var totalSearchs = 0;
 var placeHolderAnimals = [
     'Badger', 'Bat', 'Bear', 'Bird', 'Bulldog',
     'Camel', 'Chicken', 'Corgi', 'Cow', 'Crab', 'Cat',
@@ -21,12 +22,7 @@ var placeHolderAnimals = [
     'Unicorn',
     'Whale', 'Wolf',];
 
-//To implement: localStorage lock to 42 searchs per hour
-// if ("totalSearchs" in localStorage) {
-
-// } else {
-
-// };
+//To implement: localStorage lock to 42 searchs per hour via server
 
 
 $(document).ready(function () {
@@ -46,7 +42,7 @@ $(document).ready(function () {
             animal = $(this).val();
             offset = parseInt($(this).attr("data-offset"));
             $(this).attr("data-offset", offset + 1);
-            imgRequest(animal, offset * 25);
+            imgRequest(animal, offset * 36);
             canSearch = false;
             totalSearchs++
         };
@@ -82,23 +78,60 @@ $(document).ready(function () {
             newBTN.addClass("btn btn-primary animalBTN");
             newBTN.text(correctedAnimal);
             newBTN.attr("data-offset", "0")
-            $("#animalButtons").append(newBTN)
+            $("#animalButtons").prepend(newBTN)
             $(newBTN).click(function () {
-                animal = $(this).val();
-                offset = parseInt($(this).attr("data-offset"));
-                $(this).attr("data-offset", offset + 1);
-                imgRequest(animal, offset)
+                if (canSearch && totalSearchs != 42) {
+                    animal = $(this).val();
+                    offset = parseInt($(this).attr("data-offset"));
+                    $(this).attr("data-offset", offset + 1);
+                    imgRequest(animal, offset * 36);
+                    canSearch = false;
+                    totalSearchs++
+                };
             });
         };
     };
 
     var imgRequest = function (q, off) {
-
-        url = "api.giphy.com/v1/gifs/search?api_key=";
+        //clear old search
+        for (var i = 0; i < 4; i++){
+            $("#col"+i).empty();
+        };
+        //build query url
+        url = "https://api.giphy.com/v1/gifs/search?api_key=";
         url += "FhkrSB8CttaPTBZva2elJG9TNCOFs848";
         url += "&q=" + q;
-        url += "&limit=25&offset=" + off + "&lang=en";
-        console.log(url);
+        url += "&limit=36&offset=" + off + "&lang=en";
 
-    }
+        //testing json
+        url = "assits/js/local.json";
+        col = 0;
+        $.getJSON(url, function () {
+        })
+            .done(function (results) {
+                $.each(results.data, function (index, value) {
+                    //set image variables
+                    data = results.data[index].images;
+                    img = data.fixed_width.url;
+                    imgStill = data.fixed_width_still.url;
+                    imgHeight = parseInt(data.fixed_width_still.height);
+                    //build img element
+                    imgElem = $("<img>");
+                    imgElem.addClass("row imgResult")
+                    imgElem.attr("src", imgStill);
+                    imgElem.attr("data-run", img);
+                    colXTracker[col] += imgHeight;
+                    $("#col" + col).append(imgElem);
+                    //Creats a waterfall effect, but ends them around the same spot.
+                    if (index > 25){
+                        col = colXTracker.indexOf(Math.min(...colXTracker));
+                    } else if (col == 3){
+                        col = 0;
+                    } else {
+                        col++;
+                    };
+                });
+            });
+
+    };
 });

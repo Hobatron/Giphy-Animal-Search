@@ -16,6 +16,9 @@ footer{
     color: aliceblue;
     font-weight: bold;
 }
+#inputForm {
+  max-width: 325px;
+}
 .fadeRight::-webkit-input-placeholder {
     opacity: 0;
     -moz-transition: ease-in .8s;
@@ -28,9 +31,24 @@ footer{
     -webkit-transform: translateX(70%);
     transform: translateX(70%);
 }
+#results{
+
+}
+.imgResult{
+  margin-bottom: 15px;
+}
+.imgResult:last-child{
+  margin-bottom: 180px;
+}
+.imgCol {
+  margin-top: 25px;
+  max-width: 240px;
+  min-width: 240px;
+}
+
 
 #submit {
-    font-weight: bold;
+  font-weight: bold;
 	color: #fff;
 	background: radial-gradient(closest-side, #EE7752, #E73C7E, #23A6D5, #6359FF);
 	background-size: 1000% 1000%;
