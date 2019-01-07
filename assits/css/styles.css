@@ -10,6 +10,7 @@ footer{
     width: 100%;
     text-align: center;
 }
+
 .animalBTN {
     margin: 0 10px 10px 0;
     background-color: #6359FF;
@@ -31,22 +32,48 @@ footer{
     -webkit-transform: translateX(70%);
     transform: translateX(70%);
 }
-#results{
 
-}
 .imgResult{
   margin-bottom: 15px;
 }
-.imgResult:last-child{
-  margin-bottom: 180px;
-}
 .imgCol {
-  margin-top: 25px;
+  margin-top: 45px;
+  margin-bottom: 100px;
   max-width: 240px;
   min-width: 240px;
 }
-
-
+#imgStateToggler {
+  position: relative;
+  border: 2px solid darkgrey;
+  border-radius: 7px;
+  width: 75px;
+  height: 25px;
+  padding: 3px;
+  margin: 5px;
+  left: 915px;
+}
+.shadow{
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: #121212;
+  opacity: .5;
+  z-index: 2;
+}
+#slowDown{
+  display: none;
+  color: #121212;
+  margin-top: 35px;
+  z-index: 3;
+  opacity: .9;
+  position: absolute;
+  border-radius: 10px;
+  left: 35%;
+  width: 30%;
+  min-height: 52px;
+  background-color: bisque;
+}
 #submit {
   font-weight: bold;
 	color: #fff;

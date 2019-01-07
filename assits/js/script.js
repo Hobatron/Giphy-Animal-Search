@@ -71,7 +71,7 @@ $(document).ready(function () {
     var addAnimal = function (newAnimal) {
         $("#usersAnimal").val("");
         //check if there's something there and it's not nonsense(later)
-        if (newAnimal != "" && true) {
+        if (ledgable(newAnimal)) {
             lowerCaseAnimal = newAnimal.toLowerCase()
             correctedAnimal = newAnimal.charAt(0).toUpperCase() + lowerCaseAnimal.slice(1);
             newBTN = $("<button>").val(lowerCaseAnimal);
@@ -87,15 +87,18 @@ $(document).ready(function () {
                     imgRequest(animal, offset * 36);
                     canSearch = false;
                     totalSearchs++
-                };
+                } else {
+                    //currently working here
+                    $("#shadow").fadeIn(120);
+                }
             });
         };
     };
 
     var imgRequest = function (q, off) {
         //clear old search
-        for (var i = 0; i < 4; i++){
-            $("#col"+i).empty();
+        for (var i = 0; i < 4; i++) {
+            $("#col" + i).empty();
         };
         //build query url
         url = "https://api.giphy.com/v1/gifs/search?api_key=";
@@ -103,35 +106,68 @@ $(document).ready(function () {
         url += "&q=" + q;
         url += "&limit=36&offset=" + off + "&lang=en";
 
-        //testing json
-        url = "assits/js/local.json";
-        col = 0;
+        //temp JSON test file
+        //url = "assits/js/local.json";
         $.getJSON(url, function () {
-        })
-            .done(function (results) {
-                $.each(results.data, function (index, value) {
-                    //set image variables
-                    data = results.data[index].images;
-                    img = data.fixed_width.url;
-                    imgStill = data.fixed_width_still.url;
-                    imgHeight = parseInt(data.fixed_width_still.height);
-                    //build img element
-                    imgElem = $("<img>");
-                    imgElem.addClass("row imgResult")
-                    imgElem.attr("src", imgStill);
-                    imgElem.attr("data-run", img);
-                    colXTracker[col] += imgHeight;
-                    $("#col" + col).append(imgElem);
-                    //Creats a waterfall effect, but ends them around the same spot.
-                    if (index > 25){
-                        col = colXTracker.indexOf(Math.min(...colXTracker));
-                    } else if (col == 3){
-                        col = 0;
-                    } else {
-                        col++;
-                    };
-                });
-            });
+        }).done(function (results) {
+            toLocalStringifyResults = JSON.stringify(results);
+            localStorage.setItem("recentQuery",toLocalStringifyResults);
+            loadImages();
+        });
 
     };
+
+    var loadImages = function(){
+        col = 0;
+        results = JSON.parse(localStorage.getItem("recentQuery"));
+        $.each(results.data, function (index, value) {
+            //set image variables
+            dataImg = results.data[index].images;
+            url = results.data[index].url;
+            img = dataImg.fixed_width.url;
+            imgStill = dataImg.fixed_width_still.url;
+            imgHeight = parseInt(dataImg.fixed_width_still.height);
+            //img link a tag
+            linkUrl = $("<a href='"+url+"'>");
+            //build img element
+            imgElem = $("<img>");
+            imgElem.addClass("row imgResult clearfix")
+            imgElem.attr("src", imgStill);
+            imgElem.attr("data-flip", img);
+            colXTracker[col] += imgHeight;
+            $(imgElem).mouseover(function () {
+                x = $(this).attr("src");
+                $(this).attr("src", $(this).attr("data-flip"));
+                $(this).attr("data-flip", x);
+            }).mouseout(function () {
+                x = $(this).attr("src");
+                $(this).attr("src", $(this).attr("data-flip"));
+                $(this).attr("data-flip", x);
+            });
+            $("#col" + col).append(linkUrl);
+            $(linkUrl).append(imgElem);
+            //Creats a waterfall effect, but ends them around the same spot.
+            if (index > 25) {
+                col = colXTracker.indexOf(Math.min(...colXTracker));
+            } else if (col == 3) {
+                col = 0;
+            } else {
+                col++;
+            };
+        });
+    }
+
+    //to be implemented
+    var ledgable = function (newAnimal) {
+        if (newAnimal != "") {
+            return true;
+        }
+    }
+
+    if ("recentQuery" in localStorage){
+        loadImages();
+    } else {
+        localStorage.setItem("recentQuery", "");
+    };
 });
+
