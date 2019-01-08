@@ -45,6 +45,8 @@ $(document).ready(function () {
             imgRequest(animal, offset * 36);
             canSearch = false;
             totalSearchs++
+        } else {
+            $("#shadow, #slowDown").fadeIn(120);
         };
 
     });
@@ -81,6 +83,7 @@ $(document).ready(function () {
             $("#animalButtons").prepend(newBTN)
             $(newBTN).click(function () {
                 if (canSearch && totalSearchs != 42) {
+                    console.log("no error")
                     animal = $(this).val();
                     offset = parseInt($(this).attr("data-offset"));
                     $(this).attr("data-offset", offset + 1);
@@ -89,7 +92,7 @@ $(document).ready(function () {
                     totalSearchs++
                 } else {
                     //currently working here
-                    $("#shadow").fadeIn(120);
+                    $("#shadow, #slowDown").fadeIn(120);
                 }
             });
         };
@@ -107,7 +110,7 @@ $(document).ready(function () {
         url += "&limit=36&offset=" + off + "&lang=en";
 
         //temp JSON test file
-        //url = "assits/js/local.json";
+        url = "assits/js/local.json";
         $.getJSON(url, function () {
         }).done(function (results) {
             toLocalStringifyResults = JSON.stringify(results);
@@ -169,5 +172,8 @@ $(document).ready(function () {
     } else {
         localStorage.setItem("recentQuery", "");
     };
+    $(".close, #shadow").click(function () {
+        $("#shadow, #slowDown").fadeOut(120);
+    });
 });
 

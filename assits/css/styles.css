@@ -52,7 +52,7 @@ footer{
   margin: 5px;
   left: 915px;
 }
-.shadow{
+#shadow{
   display: none;
   position: fixed;
   height: 100%;
