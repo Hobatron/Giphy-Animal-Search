@@ -36,6 +36,9 @@ footer{
 .imgResult{
   margin-bottom: 15px;
 }
+.imgResult:hover{
+  box-shadow: 0px 0px 15px 7px white;
+}
 .imgCol {
   margin-top: 45px;
   margin-bottom: 100px;
@@ -61,6 +64,7 @@ footer{
   opacity: .5;
   z-index: 2;
 }
+
 #slowDown{
   display: none;
   color: #121212;

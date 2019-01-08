@@ -131,6 +131,7 @@ $(document).ready(function () {
             imgStill = dataImg.fixed_width_still.url;
             imgHeight = parseInt(dataImg.fixed_width_still.height);
             //img link a tag
+            div = $("<div>");
             linkUrl = $("<a href='"+url+"'>");
             //build img element
             imgElem = $("<img>");
@@ -147,7 +148,8 @@ $(document).ready(function () {
                 $(this).attr("src", $(this).attr("data-flip"));
                 $(this).attr("data-flip", x);
             });
-            $("#col" + col).append(linkUrl);
+            $("#col" + col).append(div);
+            $(div).append(linkUrl);
             $(linkUrl).append(imgElem);
             //Creats a waterfall effect, but ends them around the same spot.
             if (index > 25) {
@@ -158,7 +160,8 @@ $(document).ready(function () {
                 col++;
             };
         });
-    }
+        
+    };
 
     //to be implemented
     var ledgable = function (newAnimal) {
