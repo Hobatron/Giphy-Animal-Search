@@ -110,7 +110,7 @@ $(document).ready(function () {
         url += "&limit=36&offset=" + off + "&lang=en";
 
         //temp JSON test file
-        url = "assits/js/local.json";
+        //url = "assits/js/local.json";
         $.getJSON(url, function () {
         }).done(function (results) {
             toLocalStringifyResults = JSON.stringify(results);
