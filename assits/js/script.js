@@ -26,6 +26,7 @@ var placeHolderAnimals = [
 
 
 $(document).ready(function () {
+    
     //two ways to add new button
     $(document).on('keypress', function (e) {
         if (e.which == 13) {
@@ -34,21 +35,6 @@ $(document).ready(function () {
     });
     $("#submit").click(function () {
         addAnimal($("#usersAnimal").val());
-    });
-
-    //onclick listener -will be obsolete via random starter buttons-
-    $(".animalBTN").click(function () {
-        if (canSearch && totalSearchs != 42) {
-            animal = $(this).val();
-            offset = parseInt($(this).attr("data-offset"));
-            $(this).attr("data-offset", offset + 1);
-            imgRequest(animal, offset * 36);
-            canSearch = false;
-            totalSearchs++
-        } else {
-            $("#shadow, #slowDown").fadeIn(120);
-        };
-
     });
 
     //Scrolling suggestions
@@ -91,7 +77,6 @@ $(document).ready(function () {
                     canSearch = false;
                     totalSearchs++
                 } else {
-                    //currently working here
                     $("#shadow, #slowDown").fadeIn(120);
                 }
             });
@@ -168,7 +153,14 @@ $(document).ready(function () {
         if (newAnimal != "") {
             return true;
         }
-    }
+    };
+    
+    //build starting options
+    for (var i = 0 ; i < 6 ; i++) {
+        animal = placeHolderAnimals[Math.floor(Math.random() * (placeHolderAnimals.length + 1))];
+        placeHolderAnimals.splice(placeHolderAnimals.indexOf(animal), 1);
+        addAnimal(animal);
+    };
 
     if ("recentQuery" in localStorage){
         loadImages();
